@@ -2,7 +2,7 @@
  * Node.cpp
  *
  *  Created on: 2014年11月21日
- *      Author: meetsea
+ *      Author: xiaoxuliu
  */
 #include <iostream>
 #include <vector>

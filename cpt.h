@@ -2,7 +2,7 @@
  * cpt.h
  *
  *  Created on: 2014年11月21日
- *      Author: meetsea
+ *      Author: xiaoxuliu
  */
 
 #ifndef EXACT_PE_CPT_H_

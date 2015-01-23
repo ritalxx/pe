@@ -2,12 +2,13 @@
  * CPT.cpp
  *
  *  Created on: 2014年11月21日
- *      Author: meetsea
+ *      Author: xiaoxuliu
  */
 #include <iostream>
 #include <vector>
 #include <cmath>
 #include <string>
+#include <algorithm>
 #include "node.h"
 #include "cpt.h"
 #include "bn.h"
@@ -83,6 +84,7 @@ CPT CPT::multiply(CPT cpt){
 		result->addNode(_node);
 	}
 	if(debug) cout<<"current cpt size: "<<nodes2.size()<<endl;
+	max_cpt = max(max_cpt, (int) nodes2.size());
 
     int size = pow(2, nodes2.size());
     for(int i = 0; i < size; i++){

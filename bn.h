@@ -13,6 +13,7 @@ class CPT;
 class Node;
 extern double pe_result;
 extern bool debug;
+extern int max_cpt;
 
 inline string trim_right_copy(
   const string& s,
@@ -92,6 +93,9 @@ public:
 
 	/* min-fill heuristic */
 	Node* nextNodeByMinFill();
+
+	/* min-degree heuristic */
+	Node* nextNodeByMinDegree();
 
 private:
 

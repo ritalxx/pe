@@ -2,7 +2,7 @@
  * bn.cpp
  *
  *  Created on: 2014年11月21日
- *      Author: meetsea
+ *      Author: xiaoxuliu
  */
 #include <iostream>
 #include <cmath>
@@ -14,13 +14,17 @@
 
 using namespace std;
 double pe_result = 1;
-bool debug = true;
-int main() {
+bool debug = false;
+int max_cpt = 0;
+int main(int argc, char *argv[]) {
 
 	BayesianNetwork bn = BayesianNetwork();
 
+
 	/* STEP 1: read data from file */
-	bn.parseXbif("/Users/ritaliu/projects/workspace/cs271/exact_pe/test/BN_2.xbif");
+	bn.parseXbif(argv[1]);
+
+	if(argv[2]) debug = true;
 
 	/* STEP 2: removing evidence nodes */
 	map<string, Node*> nodes = bn.getNodes();
@@ -47,8 +51,10 @@ int main() {
 	/* STEP 3: variable elimination by multiply and sum out */
 	while(bn.getNodes().size() > 0){
 		/* min fill heuristic */
-		Node *_node = bn.nextNodeByMinFill();
+		//Node *_node = bn.nextNodeByMinFill();
 
+		/* min degree heuristic */
+		Node *_node = bn.nextNodeByMinDegree();
 		if(debug) cout<<"eliminating node: "<<_node->getName()<<endl;
 		if(debug) cout<<"cpts left: "<<bn.getCPTs().size()<<endl;
 		if(debug) cout<<"nodes left: "<<bn.getNodes().size()<<endl;
@@ -67,6 +73,7 @@ int main() {
 
 	/* STEP 4: print result */
 	cout<<pe_result<<" ln: "<<log(pe_result)<<endl;
+	cout<<"max cpt size: "<<max_cpt<<endl;
 
 	return 0;
 };

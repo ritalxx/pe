@@ -2,7 +2,7 @@
  * BayesianNetwork.cpp
  *
  *  Created on: 2014��11��16��
- *      Author: meetsea
+ *      Author: xiaoxuliu
  */
 #include <iostream>
 #include <vector>
@@ -40,7 +40,6 @@ bool BayesianNetwork::parseXbif(string filename){
 	const boost::regex variable_start ("^<VARIABLE[^>]*>$", boost::regex::icase);
 	const boost::regex variable_end ("^</VARIABLE>$", boost::regex::icase);
 	const boost::regex name_field ("^<NAME>(.*)</NAME>$", boost::regex::icase);
-	const boost::regex values_field ("^<VALUES>(.*)</VALUES>$", boost::regex::icase);
 	const boost::regex observed_field ("^<OBSERVED>(.*)</OBSERVED>$", boost::regex::icase);
 	const boost::regex probability_start ("^<PROBABILITY[^>]*>$", boost::regex::icase);
 	const boost::regex probability_end ("^</PROBABILITY>$", boost::regex::icase);
@@ -65,7 +64,7 @@ bool BayesianNetwork::parseXbif(string filename){
 				node.setEvidence(true);
 				node.setValue(sm.str(1));
 			}else{
-				//cout<<node.getName()<<"is evidence: false"<<endl;
+				//cout<<node.getName()<<"is evience: false"<<endl;
 				//node.setEvidence(false);
 				//node.setValue("");
 			}
@@ -224,6 +223,30 @@ Node* BayesianNetwork::nextNodeByMinFill(){
 		_pmin = _pmin / 2;
 		if(_pmin < min){
 			min = _pmin;
+			min_node = _pnode.first;
+		}
+	}
+	return min_node;
+};
+
+Node* BayesianNetwork::nextNodeByMinDegree(){
+	map<Node*,vector<Node*>> pgraph;
+	for(auto _cpt : this->_cpts){
+		vector<Node*> _nodes1 = _cpt->getNodes();
+		for(auto _node1 : _nodes1){
+			vector<Node*> _nodes2 = _cpt->getNodes();
+			for(auto _node2 : _nodes2){
+				if(_node1 != _node2) pgraph[_node1].push_back(_node2);
+			}
+		}
+	}
+
+	Node* min_node = this->_nodes.begin()->second;
+
+	int min = pgraph[this->_nodes.begin()->second].size();
+	for(auto _pnode : pgraph){
+		if( (int) _pnode.second.size() < min){
+			min = _pnode.second.size();
 			min_node = _pnode.first;
 		}
 	}
