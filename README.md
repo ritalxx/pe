@@ -1,4 +1,4 @@
-# Solving The Probability of Evidence Problem
+# Solving the Probability of Evidence Problem
 
 ## How to compile
 
