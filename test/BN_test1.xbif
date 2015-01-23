@@ -1,0 +1,63 @@
+<XBIF VERSION="0.3">
+<NETWORK>
+<NAME>BayesNet</NAME>
+
+<!-- Variables -->
+<VARIABLE TYPE="discrete">
+  <NAME>v0</NAME>
+  <VALUES>2</VALUES>
+</VARIABLE>
+<VARIABLE TYPE="discrete">
+  <NAME>v1</NAME>
+  <VALUES>2</VALUES>
+</VARIABLE>
+<VARIABLE TYPE="discrete">
+  <NAME>v2</NAME>
+  <VALUES>2</VALUES>
+  <OBSERVED>1</OBSERVED>
+</VARIABLE>
+<VARIABLE TYPE="discrete">
+  <NAME>v3</NAME>
+  <VALUES>2</VALUES>
+  <OBSERVED>0</OBSERVED>
+</VARIABLE>
+
+<!-- Probabilities -->
+<PROBABILITY>
+  <FOR>v2</FOR>
+  <GIVEN>v0</GIVEN>
+  <GIVEN>v1</GIVEN>
+  <TABLE>
+    0.1 0.9 
+    0.2 0.8 
+    0.3 0.7 
+    0.4 0.6 
+  </TABLE>
+</PROBABILITY>
+
+<PROBABILITY>
+  <FOR>v0</FOR>
+  <TABLE>
+    0.4 0.6  
+  </TABLE>
+</PROBABILITY>
+
+<PROBABILITY>
+  <FOR>v1</FOR>
+  <TABLE>
+    0.5 0.5  
+  </TABLE>
+</PROBABILITY>
+
+
+<PROBABILITY>
+  <FOR>v3</FOR>
+  <GIVEN>v2</GIVEN>
+  <TABLE>
+    0.3 0.7
+    0.6 0.4
+  </TABLE>
+</PROBABILITY>
+
+</NETWORK>
+</XBIF>
