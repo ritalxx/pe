@@ -1,4 +1,6 @@
-# Solving the Probability of Evidence Problem
+# Solving The Probability Of Evidence Problem
+
+Bayesian network is a probabilistic graphical model that represents a set of random variables and their conditional dependencies. One of the common task is to compute the probability of given evidences, which is usually denoted as P(e).
 
 ## How to compile
 
